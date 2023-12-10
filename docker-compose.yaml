@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mqtt:
+    container_name: mqtt
+    restart: always
+    image: eclipse-mosquitto:latest
+    env_file: .env
+    ports:
+      - "1883:1883"
+      - "9001:9001" #Websockets
+    volumes:
+      - ./mosquitto/entrypoint.sh:/entrypoint.sh:ro
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf:z
+      - mosquitto_data:/mosquitto/data:rw
+      - mosquitto_log:/mosquitto/log:rw
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:
