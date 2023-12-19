@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  mosquitto_mqtt:
+  mqtt:
     extends:
       file: ./plugins/edge_mqtt/docker-compose.yaml
       service: mqtt
